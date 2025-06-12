@@ -13,9 +13,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowBuyButton(true)
-    }, 900000) // 15 minutos
-
-    // Para teste, você pode reduzir para 5 segundos: 5000
+    }, 5000) // Reduzi para 5 segundos para teste - mude para 900000 para 15 minutos
 
     return () => clearTimeout(timer)
   }, [])
@@ -35,8 +33,17 @@ export default function Home() {
   return (
     <>
       {/* Header com VSL */}
-      <header className="bg-gradient-to-b from-blue-900 to-blue-800 text-white py-10">
-        <div className="container mx-auto px-4">
+      <header className="relative bg-gradient-to-b from-blue-900 to-blue-800 text-white py-10">
+        {/* Imagem de fundo */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/header-bg.jpg" // Adicione sua imagem aqui
+            alt="Background"
+            fill
+            className="object-cover opacity-50"
+          />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-5xl font-bold mb-4">
               Neurocientista de Nova York Revela:<br />
@@ -74,13 +81,11 @@ export default function Home() {
               </h3>
               
               <div className="flex justify-center mb-8">
-                <Image
-                  src="/images/product.png"
-                  alt="Onda da Memória"
-                  width={400}
-                  height={300}
-                  className="rounded-lg"
-                />
+                {/* Substitua por uma imagem real do produto */}
+                <div className="w-96 h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <p className="text-gray-500">
+                    Imagem do Produto</p>
+                </div>
               </div>
 
               <div className="flex justify-center gap-8 mb-8">
@@ -106,7 +111,7 @@ export default function Home() {
 
               <div className="mb-6">
                 <p className="text-xl mb-2">Hoje Apenas Por</p>
-                <p className="text-6xl font-bold text-green-600">R$ 147</p>
+                <p className="text-6xl font-bold text-green-600">R$ 47</p>
               </div>
 
               <a
@@ -126,41 +131,219 @@ export default function Home() {
           <p className="text-center text-xl font-semibold mb-6">
             Referências Científicas e Estudos Espirituais:
           </p>
-          <div className="flex justify-center items-center gap-8 flex-wrap">
-            {/* Adicione os logos das universidades/instituições aqui */}
-            <div className="text-gray-500">Harvard</div>
-            <div className="text-gray-500">MIT</div>
-            <div className="text-gray-500">Stanford</div>
-            <div className="text-gray-500">Yale</div>
+          {/* Imagem para Desktop */}
+          <div className="hidden md:block">
+            <Image
+              src="/images/logos-desktop.png" // Adicione sua imagem de logos para desktop
+              alt="Universidades e Instituições"
+              width={956}
+              height={102}
+              className="mx-auto"
+            />
+          </div>
+          {/* Imagem para Mobile */}
+          <div className="block md:hidden">
+            <Image
+              src="/images/logos-mobile.png" // Adicione sua imagem de logos para mobile
+              alt="Universidades e Instituições"
+              width={349}
+              height={127}
+              className="mx-auto"
+            />
           </div>
         </div>
       </section>
 
       {/* Referências Científicas */}
-      <section className="py-12">
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl font-bold mb-8">Referências Científicas:</h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Coluna Esquerda - Referências 1-24 */}
             <div>
-              <ol className="list-decimal list-inside space-y-2">
-                <li>
-                  Riedel, G., & Micheau, J. (2001). Function of the hippocampus in memory formation...
+              <ol className="list-none space-y-3 text-sm text-gray-600">
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">1.</span>
+                  Riedel, G., & Micheau, J. (2001). Function of the hippocampus in memory formation: desperately seeking resolution. <i>Progress in Neuro-Psychopharmacology and Biological Psychiatry</i>, <i>25</i>(4), 835–853.
                 </li>
-                <li>
-                  Wong, F., Omori, S., Donghia, N. M., Zheng, E. J., & Collins, J. J. (2023)...
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">2.</span>
+                  Wong, F., Omori, S., Donghia, N. M., Zheng, E. J., & Collins, J. J. (2023). Discovering small-molecule senolytics with deep neural networks. <i>Nature Aging</i>, 1–17.
                 </li>
-                {/* Adicione mais referências conforme necessário */}
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">3.</span>
+                  Smith, F. (2024, June 26). <i>"Zombie cells" could hold the secret to Alzheimer's cure</i>. Magazine.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">4.</span>
+                  Reporter, P. D. S. S. (2023, November 23). <i>Killing "zombie" cells can reverse COVID brain aging</i>. Newsweek.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">5.</span>
+                  Lin, Y.-F., Wang, L.-Y., Chen, C.-S., Li, C.-C., & Hsiao, Y.-H. (2021). Cellular senescence as a driver of cognitive decline triggered by chronic unpredictable stress. <i>Neurobiology of Stress</i>, <i>15</i>, 100341.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">6.</span>
+                  Chan, D., Suk, H., Jackson , B., Milman, N., Stark, D., Klerman, E., Kitchener, E., & Avalos, V. (2021). <i>40Hz sensory stimulation induces gamma entrainment and affects brain structure, sleep and cognition in patients with Alzheimer's disease</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">7.</span>
+                  <i>How Does the Brain Make Memories?</i> (2022). How Does the Brain Make Memories?
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">8.</span>
+                  The University of Queensland. (2016, December 2). <i>How are memories formed?</i> Qbi.uq.edu.au.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">9.</span>
+                  Saldivar, A. (2015). <i>How many neurons die in ourselves every day?</i> Prezi.com.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">10.</span>
+                  Herculano-Houzel, S. (2009). The Human Brain in numbers: a Linearly scaled-up Primate Brain. <i>Frontiers in Human Neuroscience</i>, <i>3</i>(31).
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">11.</span>
+                  Dhikav, V., & Anand, K. S. (2012). Hippocampus in Health and disease: an Overview. <i>Annals of Indian Academy of Neurology</i>, <i>15</i>(4), 239–246.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">12.</span>
+                  American Academy of Neurology. (2023). <i>Smaller hippocampus linked to cognitive decline</i>. ScienceDaily.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">13.</span>
+                  <i>Zombies: Are They Already in Your Head?</i> (n.d.). Wake Forest University School of Medicine.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">14.</span>
+                  Neumann, H., Kotter, M. R., & Franklin, R. J. M. (2008). Debris clearance by microglia: an essential link between degeneration and regeneration. <i>Brain</i>, <i>132</i>(2), 288–295.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">15.</span>
+                  Neumann, H., Kotter, M. R., & Franklin, R. J. M. (2008). Debris clearance by microglia: an essential link between degeneration and regeneration. <i>Brain</i>, <i>132</i>(2), 288–295.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">16.</span>
+                  Conde, J. R., & Streit, W. J. (2006). Microglia in the Aging Brain. <i>Journal of Neuropathology and Experimental Neurology</i>, <i>65</i>(3), 199–203.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">17.</span>
+                  Smith, F. (2024, June 26). <i>"Zombie cells" could hold the secret to Alzheimer's cure</i>. Magazine.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">18.</span>
+                  <i>Zombies: Are They Already in Your Head?</i> (n.d.). Wake Forest University School of Medicine.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">19.</span>
+                  Integrative Family Medicine of Asheville. (2022, October 28). <i>Brain Fog | Integrative Family Medicine | Asheville</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">20.</span>
+                  McCarthy, J. (2023). <i>Study finds "zombie cells" produce at accelerated rate due to COVID-19</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">21.</span>
+                  Ouvrier, B., Ismael, S., & Bix, G. J. (2024). Senescence and SASP Are Potential Therapeutic Targets for Ischemic Stroke. <i>Pharmaceuticals</i>, <i>17</i>(3), 312.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">22.</span>
+                  Kumar, M., Yan, P., Kuchel, G. A., & Xu, M. (2024). Cellular Senescence as a Targetable Risk Factor for Cardiovascular Diseases. <i>JACC. Basic to Translational Science</i>, <i>9</i>(4), 522–534.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">23.</span>
+                  Rubén Aquino-Martínez. (2023). The Emerging Role of Accelerated Cellular Senescence in Periodontitis. <i>Journal of Dental Research</i>, <i>102</i>(8), 854–862.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">24.</span>
+                  Lee, K. S., Lin, S., Copland, D. A., Dick, A. D., & Liu, J. (2021). Cellular senescence in the aging retina and developments of senotherapies for age-related macular degeneration. <i>Journal of Neuroinflammation</i>, <i>18</i>(1).
+                </li>
               </ol>
             </div>
+            
+            {/* Coluna Direita - Referências 25-44 */}
             <div>
-              <ol className="list-decimal list-inside space-y-2" start={25}>
-                <li>
-                  Pignolo, R. J., Law, S. F., & Chandra, A. (2021). Bone Aging...
+              <ol className="list-none space-y-3 text-sm text-gray-600" start={25}>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">25.</span>
+                  Pignolo, R. J., Law, S. F., & Chandra, A. (2021). Bone Aging, Cellular Senescence, and Osteoporosis. <i>JBMR Plus</i>, <i>5</i>(4).
                 </li>
-                <li>
-                  magazine, M. S. (2017). To Stay Young, Kill Zombie Cells...
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">26.</span>
+                  magazine, M. S. (2017). <i>To Stay Young, Kill Zombie Cells</i>. Scientific American.
                 </li>
-                {/* Adicione mais referências conforme necessário */}
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">27.</span>
+                  Cole, W. (2024, March 20). <i>Zombie Cells And Longevity: What You Need To Know</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">28.</span>
+                  The Picower Institute for Learning and Memory. (2024). <i>40Hz rhythms fight Alzheimer's at the cellular and molecular level | Picower Institute</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">29.</span>
+                  Singer, A. C., Martorell, A. J., Douglas, J. M., Abdurrob, F., Attokaren, M. K., Tipton, J., Mathys, H., Adaikkan, C., & Tsai, L.-H. (2018). Noninvasive 40-Hz light flicker to recruit microglia and reduce amyloid beta load. <i>Nature Protocols</i>, <i>13</i>(8), 1850–1868.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">30.</span>
+                  Ruth Maria Ingendoh, Posny, E. S., & Heine, A. (2023). Binaural beats to entrain the brain? A systematic review of the effects of binaural beat stimulation on brain oscillatory activity. <i>PLoS ONE</i>, <i>18</i>(5).
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">31.</span>
+                  Liu, C., Han, T., Xu, Z., Liu, J., Zhang, M., Du, J., Zhou, Q., Duan, Y., Li, Y., Wang, J., Cui, D., & Wang, Y. (2021). Modulating Gamma Oscillations Promotes Brain Connectivity to Improve Cognitive Impairment. <i>Cerebral Cortex</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">32.</span>
+                  Melinosky, C. (2023, August 16). <i>What to Know About Gamma Brain Waves</i>. WebMD.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">33.</span>
+                  Ruth Maria Ingendoh, Posny, E. S., & Heine, A. (2023). Binaural beats to entrain the brain? A systematic review. <i>PLoS ONE</i>, <i>18</i>(5).
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">34.</span>
+                  Jirakittayakorn, N., & Wongsawat, Y. (2017). Brain Responses to a 6-Hz Binaural Beat: Effects on General Theta Rhythm and Frontal Midline Theta Activity. <i>Frontiers in Neuroscience</i>, <i>11</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">35.</span>
+                  Singer, A. C., Martorell, A. J., Douglas, J. M., et al. (2018). Noninvasive 40-Hz light flicker to recruit microglia. <i>Nature Protocols</i>, <i>13</i>(8), 1850–1868.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">36.</span>
+                  Ortiz, T., Martínez, A. M., Fernández, A., et al. (2008). Impact of auditory stimulation at a frequency of 5 Hz in verbal memory. <i>Actas Espanolas de Psiquiatria</i>, <i>36</i>(6), 307–313.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">37.</span>
+                  Staff, R. T., Hogan, M. J., Williams, D. S., & Whalley, L. J. (2018). Intellectual engagement and cognitive ability in later life. <i>BMJ</i>, <i>363</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">38.</span>
+                  Neurology live. (2023, January 28). <i>Gamma Frequency Sensory Stimulation as a Potential Therapy for Alzheimer Disease</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">39.</span>
+                  Cantero, J. L., Atienza, M., Madsen, J. R., & Stickgold, R. (2004). Gamma EEG dynamics in neocortex and hippocampus during human wakefulness and sleep. <i>NeuroImage</i>, <i>22</i>(3), 1271–1280.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">40.</span>
+                  Massari, P. (2024). <i>Colloquy Podcast: Meditation Changes Your Brain. Here's How. | The Harvard Kenneth C. Griffin Graduate School</i>.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">41.</span>
+                  Madhavan, R., Millman, D., Tang, H., et al. (2014). Decrease in gamma-band activity tracks sequence learning. <i>Frontiers in Systems Neuroscience</i>, <i>8</i>, 222.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">42.</span>
+                  NIH Research Matters. (2021, April 27). <i>Lack of sleep in middle age may increase dementia risk</i>. National Institute on Aging.
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">43.</span>
+                  Chan, D., Suk, H.-J., Jackson, B. L., et al. (2022). Gamma frequency sensory stimulation in mild probable Alzheimer's disease patients. <i>PLOS ONE</i>, <i>17</i>(12).
+                </li>
+                <li className="relative pl-8">
+                  <span className="absolute left-0 text-gray-500">44.</span>
+                  Cimenser, A., Hempel, E., Travers, T., et al. (2021). Sensory-Evoked 40-Hz Gamma Oscillation Improves Sleep and Daily Living Activities in Alzheimer's Disease Patients. <i>Frontiers in Systems Neuroscience</i>, <i>15</i>.
+                </li>
               </ol>
             </div>
           </div>
@@ -192,7 +375,11 @@ export default function Home() {
               Copyright © {new Date().getFullYear()} Onda da Memória. Todos os direitos reservados.
             </p>
             <p className="text-sm text-gray-500 mt-4 max-w-4xl mx-auto">
-              Aviso Legal: Este produto não se destina a diagnosticar, tratar, curar ou prevenir qualquer doença...
+              Aviso Legal: Este produto não se destina a diagnosticar, tratar, curar ou prevenir qualquer doença. 
+              James Rivers é um pseudônimo usado com o consentimento de nosso principal neurocientista, 
+              que deseja manter a privacidade pessoal para si e sua família. As qualificações e credenciais 
+              atribuídas a este nome são genuínas e verificadas. Esta medida é tomada para proteger a 
+              privacidade do indivíduo sem enganar nossos clientes. Agradecemos sua compreensão.
             </p>
           </div>
         </div>
@@ -220,13 +407,9 @@ export default function Home() {
             
             <div className="flex items-center gap-6 mb-6">
               <div className="flex-shrink-0">
-                <Image
-                  src="/images/doctor.png"
-                  alt="Doutor"
-                  width={160}
-                  height={142}
-                  className="rounded-lg"
-                />
+                <div className="w-40 h-36 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <p className="text-gray-500">Imagem Doutor</p>
+                </div>
               </div>
               <div>
                 <p className="text-gray-700">
