@@ -73,53 +73,91 @@ export default function Home() {
       {/* Botão de Compra (aparece após o timer) */}
       {showBuyButton && (
         <section className="bg-gray-100 py-12">
-          <div className="container mx-auto px-4">
-            <div className="bg-white rounded-lg shadow-xl p-8 text-center">
-              <h3 className="text-3xl font-bold mb-4">
-                Ative Sua Onda da Memória<br />
-                <span className="text-xl text-gray-600">(Garantia de 90 Dias)</span>
-              </h3>
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="bg-gradient-to-b from-yellow-50 to-white rounded-lg shadow-xl overflow-hidden">
+              {/* Título Principal com fundo amarelo */}
+              <div className="bg-yellow-100 text-center py-6">
+                <h3 className="text-3xl md:text-4xl font-bold text-blue-900 mb-2">
+                  Ative Sua Onda da Memória
+                </h3>
+                <p className="text-lg text-blue-900">
+                  (Garantia de 90 Dias)
+                </p>
+              </div>
               
-              <div className="flex justify-center mb-8">
-                {/* Substitua por uma imagem real do produto */}
-                <div className="w-96 h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">
-                    Imagem do Produto</p>
+              {/* Conteúdo principal */}
+              <div className="p-8 md:p-12">
+                {/* Imagem do Produto */}
+                <div className="flex justify-center mb-10">
+                  <Image
+                    src="/images/imagemproduto.png"
+                    alt="Onda da Memória - Produto Completo"
+                    width={500}
+                    height={300}
+                    className="max-w-full h-auto"
+                  />
+                </div>
+
+                {/* Ícones de Benefícios */}
+                <div className="flex justify-center gap-3 md:gap-6 mb-10 flex-wrap">
+                  <div className="bg-purple-500 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-md">
+                    <Image
+                      src="/images/desconto.png"
+                      alt="Desconto"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6"
+                    />
+                    <span className="font-semibold text-xs md:text-sm">Desconto<br />Especial</span>
+                  </div>
+                  <div className="bg-blue-500 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-md">
+                    <Image
+                      src="/images/acesso.png"
+                      alt="Acesso"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6"
+                    />
+                    <span className="font-semibold text-xs md:text-sm">Acesso<br />Instantâneo</span>
+                  </div>
+                  <div className="bg-teal-500 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-md">
+                    <Image
+                      src="/images/dinheiro.png"
+                      alt="Bônus"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6"
+                    />
+                    <span className="font-semibold text-xs md:text-sm">Bônus de<br />Início Rápido</span>
+                  </div>
+                </div>
+
+                {/* Preço com Setas */}
+                <div className="text-center mb-8">
+                  <p className="text-lg font-medium mb-2">Hoje Apenas Por</p>
+                  <div className="flex items-center justify-center gap-4 md:gap-8">
+                    <span className="text-green-500 text-3xl md:text-4xl">→</span>
+                    <p className="text-5xl md:text-6xl font-bold text-blue-900">R$ 47</p>
+                    <span className="text-green-500 text-3xl md:text-4xl">←</span>
+                  </div>
+                </div>
+
+                {/* Botão de Compra com garantia já incluída na imagem */}
+                <div className="flex justify-center">
+                  <a
+                    href="#" // Substitua pelo link de checkout
+                    className="inline-block"
+                  >
+                    <Image
+                      src="/images/compraragora.png"
+                      alt="Comprar Agora - Garantia 90 dias"
+                      width={300}
+                      height={80}
+                      className="transform hover:scale-105 transition-all duration-200 cursor-pointer"
+                    />
+                  </a>
                 </div>
               </div>
-
-              <div className="flex justify-center gap-8 mb-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-2 mx-auto">
-                    <span className="text-white text-2xl">%</span>
-                  </div>
-                  <p className="text-sm">Desconto<br />Especial</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-2 mx-auto">
-                    <span className="text-white text-2xl">⚡</span>
-                  </div>
-                  <p className="text-sm">Acesso<br />Instantâneo</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-2 mx-auto">
-                    <span className="text-white text-2xl">🎁</span>
-                  </div>
-                  <p className="text-sm">Bônus<br />Exclusivos</p>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <p className="text-xl mb-2">Hoje Apenas Por</p>
-                <p className="text-6xl font-bold text-green-600">R$ 47</p>
-              </div>
-
-              <a
-                href="#" // Substitua pelo link de checkout
-                className="inline-block bg-green-500 hover:bg-green-600 text-white text-2xl font-bold py-6 px-12 rounded-lg transform hover:scale-105 transition-all duration-200 shadow-lg animate-pulse"
-              >
-                QUERO MELHORAR MINHA MEMÓRIA AGORA
-              </a>
             </div>
           </div>
         </section>
@@ -407,9 +445,13 @@ export default function Home() {
             
             <div className="flex items-center gap-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="w-40 h-36 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">Imagem Doutor</p>
-                </div>
+                <Image
+                  src="/images/mulher.png"
+                  alt="Especialista"
+                  width={160}
+                  height={142}
+                  className="rounded-lg"
+                />
               </div>
               <div>
                 <p className="text-gray-700">
