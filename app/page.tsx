@@ -6,29 +6,149 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
-  const [showBuyButton, setShowBuyButton] = useState(false)
-  const [showPopup, setShowPopup] = useState(false)
-
-  // Timer para mostrar o botão de compra após 15 minutos (900 segundos)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowBuyButton(true)
-    }, 5000) // Reduzi para 5 segundos para teste - mude para 900000 para 15 minutos
-
-    return () => clearTimeout(timer)
-  }, [])
+  // Removido o useState do popup pois agora é criado diretamente no DOM
 
   // Detectar tentativa de sair da página
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !showPopup) {
-        setShowPopup(true)
+      if (e.clientY <= 0) {
+        // Verifica se o popup já existe antes de criar
+        if (!document.getElementById('exit-popup')) {
+          createExitPopup()
+        }
       }
     }
 
+    const createExitPopup = () => {
+      // Cria o popup diretamente no DOM sem usar React state
+      const popupHTML = `
+        <div id="exit-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999; padding: 16px;">
+          <div class="bg-white rounded-lg p-8 max-w-2xl w-full relative" style="background: white; border-radius: 8px; padding: 32px; max-width: 672px; width: 100%; position: relative;">
+            <button id="close-popup" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl" style="position: absolute; top: 16px; right: 16px; color: #6b7280; font-size: 24px; background: none; border: none; cursor: pointer;">
+              ×
+            </button>
+            
+            <h4 class="text-3xl font-bold text-center mb-4" style="font-size: 30px; font-weight: bold; text-align: center; margin-bottom: 16px;">
+              <span style="color: #dc2626;">ESPERE!</span>
+              <span style="color: #1e40af;"> Em Apenas 1:49...</span>
+            </h4>
+            
+            <h5 class="text-xl text-center text-blue-800 mb-6" style="font-size: 20px; text-align: center; color: #1e40af; margin-bottom: 24px;">
+              Vou Revelar Meu Truque de 8 Segundos no Ouvido Para Uma Memória Melhor!
+            </h5>
+            
+            <div class="flex items-center gap-6 mb-6" style="display: flex; align-items: center; gap: 24px; margin-bottom: 24px;">
+              <div class="flex-shrink-0" style="flex-shrink: 0;">
+                <img src="/images/mulher.png" alt="Especialista" width="160" height="142" class="rounded-lg" style="border-radius: 8px; width: 160px; height: 142px;" />
+              </div>
+              <div>
+                <p style="color: #374151;">
+                  Você consegue tocar seu lóbulo da orelha? Então você pode usar este truque de 8 segundos, 
+                  comprovado pela ciência, para ter um pensamento mais aguçado e uma memória melhor - 
+                  não importa sua idade! Se você tem mais de 50 anos, você precisa ver isso...
+                </p>
+              </div>
+            </div>
+            
+            <div class="text-center" style="text-align: center;">
+              <button id="continue-watching" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 px-8 rounded-lg text-lg animate-pulse" style="background: #fbbf24; color: black; font-weight: bold; padding: 16px 32px; border-radius: 8px; font-size: 18px; border: none; cursor: pointer; animation: pulse 2s infinite;">
+                <strong>
+                  <u>Continuar Assistindo Para Ver o Truque de 8 Segundos &gt;&gt;</u>
+                </strong>
+              </button>
+              
+              <p class="mt-4 text-sm" style="margin-top: 16px; font-size: 14px;">
+                Ou prefere ler? 
+                <a href="/texto" style="color: #2563eb; text-decoration: underline;">
+                  Veja a versão em texto aqui...
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      `
+      
+      document.body.insertAdjacentHTML('beforeend', popupHTML)
+      
+      // Adiciona eventos aos botões
+      const closeBtn = document.getElementById('close-popup')
+      const continueBtn = document.getElementById('continue-watching')
+      
+      const closePopup = () => {
+        const popup = document.getElementById('exit-popup')
+        if (popup) {
+          popup.remove()
+        }
+      }
+      
+      if (closeBtn) closeBtn.addEventListener('click', closePopup)
+      if (continueBtn) continueBtn.addEventListener('click', closePopup)
+    }
+
     document.addEventListener('mouseleave', handleMouseLeave)
-    return () => document.removeEventListener('mouseleave', handleMouseLeave)
-  }, [showPopup])
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave)
+      // Remove popup se existir quando o componente for desmontado
+      const popup = document.getElementById('exit-popup')
+      if (popup) popup.remove()
+    }
+  }, [])
+
+  // Carregar script da Vturb e configurar delay
+  useEffect(() => {
+    // Adiciona o CSS para esconder elementos
+    const style = document.createElement('style')
+    style.textContent = `
+      .esconder {
+        display: none;
+      }
+    `
+    document.head.appendChild(style)
+
+    // Carrega o script da Vturb
+    if (!document.querySelector('script[src*="converteai.net"]')) {
+      const script = document.createElement("script");
+      script.src = "https://scripts.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/players/684afea5e6c281d4affd78cd/v4/player.js";
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
+    // Função de delay da Vturb
+    const initDelayForHiddenElements = () => {
+      const delaySeconds = 10; // ALTERE AQUI OS SEGUNDOS PARA APARECER O BOTÃO
+      
+      const player = document.querySelector("vturb-smartplayer");
+      if (!player) {
+        // Se o player não estiver pronto, tenta novamente em 500ms
+        setTimeout(initDelayForHiddenElements, 500);
+        return;
+      }
+      
+      player.addEventListener("player:ready", () => {
+        showElementsAfterDelay(player, delaySeconds);
+      });
+    };
+
+    const showElementsAfterDelay = (player: any, seconds: number) => {
+      player.displayHiddenElements(seconds, [".esconder"], {
+        persist: true
+      });
+    };
+
+    // Inicia o delay quando o DOM estiver pronto
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDelayForHiddenElements);
+    } else {
+      initDelayForHiddenElements();
+    }
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('DOMContentLoaded', initDelayForHiddenElements);
+      const styleEl = document.querySelector('style[data-vturb-delay]');
+      if (styleEl) styleEl.remove();
+    };
+  }, [])
 
   return (
     <>
@@ -58,110 +178,111 @@ export default function Home() {
 
           {/* Vídeo VSL */}
           <div className="max-w-4xl mx-auto">
-            <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
-              {/* Aqui você vai inserir o código embed da Vturb */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-white text-xl">
-                  [INSERIR CÓDIGO EMBED DA VTURB AQUI]
-                </p>
-              </div>
+            <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl border-4 border-white">
+              {/* Player da Vturb */}
+              <div
+                className="w-full h-full"
+                dangerouslySetInnerHTML={{
+                  __html: `<vturb-smartplayer id="vid-684afea5e6c281d4affd78cd" style="display: block; margin: 0 auto; width: 100%; height: 100%;"></vturb-smartplayer>`
+                }}
+              />
             </div>
           </div>
         </div>
       </header>
 
-      {/* Botão de Compra (aparece após o timer) */}
-      {showBuyButton && (
-        <section className="bg-gray-100 py-12">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <div className="bg-gradient-to-b from-yellow-50 to-white rounded-lg shadow-xl overflow-hidden">
-              {/* Título Principal com fundo amarelo */}
-              <div className="bg-yellow-100 text-center py-6">
-                <h3 className="text-3xl md:text-4xl font-bold text-blue-900 mb-2">
-                  Ative Sua Onda da Memória
-                </h3>
-                <p className="text-lg text-blue-900">
-                  (Garantia de 90 Dias)
-                </p>
+      {/* Botão de Compra (controlado pela Vturb com classe .esconder) */}
+      <section className="bg-gray-100 py-12 esconder">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="bg-gradient-to-b from-yellow-50 to-white rounded-lg shadow-xl overflow-hidden">
+            {/* Título Principal com fundo amarelo */}
+            <div className="bg-yellow-100 text-center py-10">
+              <h3 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+                Ative Sua Onda da Memória
+              </h3>
+              <p className="text-xl md:text-2xl text-blue-900 font-semibold">
+                (Garantia de 90 Dias)
+              </p>
+            </div>
+            
+            {/* Conteúdo principal */}
+            <div className="p-8 md:p-12">
+              {/* Imagem do Produto */}
+              <div className="flex justify-center mb-10">
+                <Image
+                  src="/images/imagemproduto.png"
+                  alt="Onda da Memória - Produto Completo"
+                  width={500}
+                  height={300}
+                  className="max-w-full h-auto"
+                />
               </div>
-              
-              {/* Conteúdo principal */}
-              <div className="p-8 md:p-12">
-                {/* Imagem do Produto */}
-                <div className="flex justify-center mb-10">
-                  <Image
-                    src="/images/imagemproduto.png"
-                    alt="Onda da Memória - Produto Completo"
-                    width={500}
-                    height={300}
-                    className="max-w-full h-auto"
-                  />
-                </div>
 
-                {/* Ícones de Benefícios */}
-                <div className="flex justify-center gap-3 md:gap-6 mb-10 flex-wrap">
-                  <div className="bg-purple-500 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-md">
+              {/* Ícones de Benefícios */}
+              <div className="flex justify-center mb-10">
+                <div className="flex overflow-hidden rounded-full shadow-lg">
+                  <div className="bg-purple-500 text-white px-8 py-4 flex items-center gap-3">
                     <Image
                       src="/images/desconto.png"
                       alt="Desconto"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6"
+                      width={28}
+                      height={28}
+                      className="w-7 h-7"
                     />
-                    <span className="font-semibold text-xs md:text-sm">Desconto<br />Especial</span>
+                    <span className="font-semibold text-sm md:text-base">Desconto<br />Especial</span>
                   </div>
-                  <div className="bg-blue-500 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-md">
+                  <div className="bg-blue-500 text-white px-8 py-4 flex items-center gap-3">
                     <Image
                       src="/images/acesso.png"
                       alt="Acesso"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6"
+                      width={28}
+                      height={28}
+                      className="w-7 h-7"
                     />
-                    <span className="font-semibold text-xs md:text-sm">Acesso<br />Instantâneo</span>
+                    <span className="font-semibold text-sm md:text-base">Acesso<br />Instantâneo</span>
                   </div>
-                  <div className="bg-teal-500 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-md">
+                  <div className="bg-teal-500 text-white px-8 py-4 flex items-center gap-3">
                     <Image
                       src="/images/dinheiro.png"
                       alt="Bônus"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6"
+                      width={28}
+                      height={28}
+                      className="w-7 h-7"
                     />
-                    <span className="font-semibold text-xs md:text-sm">Bônus de<br />Início Rápido</span>
+                    <span className="font-semibold text-sm md:text-base">Bônus de<br />Início Rápido</span>
                   </div>
                 </div>
+              </div>
 
-                {/* Preço com Setas */}
-                <div className="text-center mb-8">
-                  <p className="text-lg font-medium mb-2">Hoje Apenas Por</p>
-                  <div className="flex items-center justify-center gap-4 md:gap-8">
-                    <span className="text-green-500 text-3xl md:text-4xl">→</span>
-                    <p className="text-5xl md:text-6xl font-bold text-blue-900">R$ 47</p>
-                    <span className="text-green-500 text-3xl md:text-4xl">←</span>
-                  </div>
+              {/* Preço com Setas */}
+              <div className="text-center mb-8">
+                <p className="text-lg font-medium mb-2">Hoje Apenas Por</p>
+                <div className="flex items-center justify-center gap-4 md:gap-8">
+                  <span className="text-green-500 text-3xl md:text-4xl">→</span>
+                  <p className="text-5xl md:text-6xl font-bold text-blue-900">R$ 47</p>
+                  <span className="text-green-500 text-3xl md:text-4xl">←</span>
                 </div>
+              </div>
 
-                {/* Botão de Compra com garantia já incluída na imagem */}
-                <div className="flex justify-center">
-                  <a
-                    href="#" // Substitua pelo link de checkout
-                    className="inline-block"
-                  >
-                    <Image
-                      src="/images/compraragora.png"
-                      alt="Comprar Agora - Garantia 90 dias"
-                      width={300}
-                      height={80}
-                      className="transform hover:scale-105 transition-all duration-200 cursor-pointer"
-                    />
-                  </a>
-                </div>
+              {/* Botão de Compra com garantia já incluída na imagem */}
+              <div className="flex justify-center">
+                <a
+                  href="#" // Substitua pelo link de checkout
+                  className="inline-block transform hover:scale-105 transition-all duration-200"
+                >
+                  <Image
+                    src="/images/compraragora.png"
+                    alt="Comprar Agora - Garantia 90 dias"
+                    width={400}
+                    height={120}
+                    className="cursor-pointer"
+                  />
+                </a>
               </div>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* Logos de credibilidade */}
       <section className="bg-gray-200 py-8">
@@ -423,65 +544,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Popup de Saída */}
-      {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-8 max-w-2xl w-full relative">
-            <button
-              onClick={() => setShowPopup(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
-            >
-              ×
-            </button>
-            
-            <h4 className="text-3xl font-bold text-center mb-4">
-              <span className="text-red-600">ESPERE!</span>{' '}
-              <span className="text-blue-800">Em Apenas 1:49...</span>
-            </h4>
-            
-            <h5 className="text-xl text-center text-blue-800 mb-6">
-              Vou Revelar Meu Truque de 8 Segundos no Ouvido Para Uma Memória Melhor!
-            </h5>
-            
-            <div className="flex items-center gap-6 mb-6">
-              <div className="flex-shrink-0">
-                <Image
-                  src="/images/mulher.png"
-                  alt="Especialista"
-                  width={160}
-                  height={142}
-                  className="rounded-lg"
-                />
-              </div>
-              <div>
-                <p className="text-gray-700">
-                  Você consegue tocar seu lóbulo da orelha? Então você pode usar este truque de 8 segundos, 
-                  comprovado pela ciência, para ter um pensamento mais aguçado e uma memória melhor - 
-                  não importa sua idade! Se você tem mais de 50 anos, você precisa ver isso...
-                </p>
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <button
-                onClick={() => setShowPopup(false)}
-                className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 px-8 rounded-lg text-lg animate-pulse"
-              >
-                <strong>
-                  <u>Continuar Assistindo Para Ver o Truque de 8 Segundos &gt;&gt;</u>
-                </strong>
-              </button>
-              
-              <p className="mt-4 text-sm">
-                Ou prefere ler?{' '}
-                <Link href="/texto" className="text-blue-600 underline hover:text-blue-800">
-                  Veja a versão em texto aqui...
-                </Link>
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Popup de Saída - Removido daqui pois agora é criado dinamicamente no DOM */}
     </>
   )
 }

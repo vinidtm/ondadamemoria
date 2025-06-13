@@ -29,15 +29,7 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     siteName: 'Onda da Memória',
   },
-  icons: {
-    icon: [
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-  },
+
 }
 
 export default function RootLayout({
@@ -48,81 +40,19 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${lora.variable} ${openSans.variable}`}>
       <head>
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-XXXXXX');
-            `,
-          }}
-        />
-        
-        {/* Facebook Pixel */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', 'SEU_PIXEL_ID');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
+        {/* Otimização de Carregamento da Vturb */}
+        <link rel="preload" href="https://scripts.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/players/684afea5e6c281d4affd78cd/v4/player.js" as="script" />
+        <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script" />
+        <link rel="preload" href="https://cdn.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/684afe9ba691d5032736115a/main.m3u8" as="fetch" />
+        <link rel="dns-prefetch" href="https://cdn.converteai.net" />
+        <link rel="dns-prefetch" href="https://scripts.converteai.net" />
+        <link rel="dns-prefetch" href="https://images.converteai.net" />
+        <link rel="dns-prefetch" href="https://api.vturb.com.br" />
+
+
       </head>
       <body className="font-lora">
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-        
         {children}
-        
-        {/* Scripts de rastreamento adicionais */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Rastreamento de tempo na página
-              let timeOnPage = 0;
-              setInterval(() => {
-                timeOnPage += 1;
-                if (timeOnPage === 15) {
-                  if (typeof fbq !== 'undefined') {
-                    fbq('trackCustom', 'TimeOnPage15s');
-                  }
-                }
-                if (timeOnPage === 30) {
-                  if (typeof fbq !== 'undefined') {
-                    fbq('trackCustom', 'TimeOnPage30s');
-                  }
-                }
-              }, 1000);
-              
-              // Rastreamento de clique no botão de compra
-              document.addEventListener('click', (e) => {
-                if (e.target.closest('a[href*="checkout"]')) {
-                  if (typeof fbq !== 'undefined') {
-                    fbq('track', 'InitiateCheckout');
-                  }
-                }
-              });
-            `,
-          }}
-        />
       </body>
     </html>
   )
