@@ -1,4 +1,4 @@
-const showElementsAfter// app/page.tsx
+// app/page.tsx
 'use client'
 
 import { useEffect } from 'react'
@@ -40,6 +40,7 @@ export default function Home() {
     };
 
     const showElementsAfterDelay = (player: Element, seconds: number) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (player as any).displayHiddenElements(seconds, [".esconder"], {
         persist: true
       });
@@ -77,13 +78,13 @@ export default function Home() {
               <span className="hidden md:block">Famoso Neurocientista de Nova York:</span>
               <span className="block md:hidden">Famoso Neurocientista de Nova York:</span>
               <br />
-              <span className="text-2xl md:text-6xl text-white block px-1 md:px-0">
-                "Faça Este Truque de 8 Segundos no Ouvido
+              <span className="text-3xl md:text-6xl text-white block px-1 md:px-0">
+                &ldquo;Faça Este Truque de 8 Segundos no Ouvido
               </span>
             </p>
             <div className="inline-block w-full md:w-auto">
-              <p className="bg-red-500 text-white text-2xl md:text-6xl font-bold px-2 md:px-4 py-2 block mx-1 md:mx-0">
-                Para Melhorar Sua Memória.."
+              <p className="bg-red-500 text-white text-3xl md:text-6xl font-bold px-2 md:px-4 py-2 block mx-1 md:mx-0">
+                Para Melhorar Sua Memória..&rdquo;
               </p>
             </div>
           </div>
@@ -369,7 +370,7 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">28.</span>
-                  The Picower Institute for Learning and Memory. (2024). <i>40Hz rhythms fight Alzheimer's at the cellular and molecular level | Picower Institute</i>.
+                  The Picower Institute for Learning and Memory. (2024). <i>40Hz rhythms fight Alzheimer&rsquo;s at the cellular and molecular level | Picower Institute</i>.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">29.</span>
@@ -417,7 +418,7 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">40.</span>
-                  Massari, P. (2024). <i>Colloquy Podcast: Meditation Changes Your Brain. Here's How. | The Harvard Kenneth C. Griffin Graduate School</i>.
+                  Massari, P. (2024). <i>Colloquy Podcast: Meditation Changes Your Brain. Here&rsquo;s How. | The Harvard Kenneth C. Griffin Graduate School</i>.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">41.</span>
