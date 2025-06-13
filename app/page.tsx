@@ -1,4 +1,4 @@
-// app/page.tsx
+const showElementsAfter// app/page.tsx
 'use client'
 
 import { useEffect } from 'react'
