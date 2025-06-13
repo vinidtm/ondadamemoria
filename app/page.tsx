@@ -6,94 +6,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
-  // Removido o useState do popup pois agora é criado diretamente no DOM
-
-  // Detectar tentativa de sair da página
-  useEffect(() => {
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) {
-        // Verifica se o popup já existe antes de criar
-        if (!document.getElementById('exit-popup')) {
-          createExitPopup()
-        }
-      }
-    }
-
-    const createExitPopup = () => {
-      // Cria o popup diretamente no DOM sem usar React state
-      const popupHTML = `
-        <div id="exit-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999; padding: 16px;">
-          <div class="bg-white rounded-lg p-8 max-w-2xl w-full relative" style="background: white; border-radius: 8px; padding: 32px; max-width: 672px; width: 100%; position: relative;">
-            <button id="close-popup" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl" style="position: absolute; top: 16px; right: 16px; color: #6b7280; font-size: 24px; background: none; border: none; cursor: pointer;">
-              ×
-            </button>
-            
-            <h4 class="text-3xl font-bold text-center mb-4" style="font-size: 30px; font-weight: bold; text-align: center; margin-bottom: 16px;">
-              <span style="color: #dc2626;">ESPERE!</span>
-              <span style="color: #1e40af;"> Em Apenas 1:49...</span>
-            </h4>
-            
-            <h5 class="text-xl text-center text-blue-800 mb-6" style="font-size: 20px; text-align: center; color: #1e40af; margin-bottom: 24px;">
-              Vou Revelar Meu Truque de 8 Segundos no Ouvido Para Uma Memória Melhor!
-            </h5>
-            
-            <div class="flex items-center gap-6 mb-6" style="display: flex; align-items: center; gap: 24px; margin-bottom: 24px;">
-              <div class="flex-shrink-0" style="flex-shrink: 0;">
-                <img src="/images/mulher.png" alt="Especialista" width="160" height="142" class="rounded-lg" style="border-radius: 8px; width: 160px; height: 142px;" />
-              </div>
-              <div>
-                <p style="color: #374151;">
-                  Você consegue tocar seu lóbulo da orelha? Então você pode usar este truque de 8 segundos, 
-                  comprovado pela ciência, para ter um pensamento mais aguçado e uma memória melhor - 
-                  não importa sua idade! Se você tem mais de 50 anos, você precisa ver isso...
-                </p>
-              </div>
-            </div>
-            
-            <div class="text-center" style="text-align: center;">
-              <button id="continue-watching" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 px-8 rounded-lg text-lg animate-pulse" style="background: #fbbf24; color: black; font-weight: bold; padding: 16px 32px; border-radius: 8px; font-size: 18px; border: none; cursor: pointer; animation: pulse 2s infinite;">
-                <strong>
-                  <u>Continuar Assistindo Para Ver o Truque de 8 Segundos &gt;&gt;</u>
-                </strong>
-              </button>
-              
-              <p class="mt-4 text-sm" style="margin-top: 16px; font-size: 14px;">
-                Ou prefere ler? 
-                <a href="/texto" style="color: #2563eb; text-decoration: underline;">
-                  Veja a versão em texto aqui...
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      `
-      
-      document.body.insertAdjacentHTML('beforeend', popupHTML)
-      
-      // Adiciona eventos aos botões
-      const closeBtn = document.getElementById('close-popup')
-      const continueBtn = document.getElementById('continue-watching')
-      
-      const closePopup = () => {
-        const popup = document.getElementById('exit-popup')
-        if (popup) {
-          popup.remove()
-        }
-      }
-      
-      if (closeBtn) closeBtn.addEventListener('click', closePopup)
-      if (continueBtn) continueBtn.addEventListener('click', closePopup)
-    }
-
-    document.addEventListener('mouseleave', handleMouseLeave)
-    return () => {
-      document.removeEventListener('mouseleave', handleMouseLeave)
-      // Remove popup se existir quando o componente for desmontado
-      const popup = document.getElementById('exit-popup')
-      if (popup) popup.remove()
-    }
-  }, [])
-
   // Carregar script da Vturb e configurar delay
   useEffect(() => {
     // Adiciona o CSS para esconder elementos
@@ -113,13 +25,12 @@ export default function Home() {
       document.head.appendChild(script);
     }
 
-    // Função de delay da Vturb
+    // Função de delay da Vturb para mostrar botão
     const initDelayForHiddenElements = () => {
       const delaySeconds = 10; // ALTERE AQUI OS SEGUNDOS PARA APARECER O BOTÃO
       
       const player = document.querySelector("vturb-smartplayer");
       if (!player) {
-        // Se o player não estiver pronto, tenta novamente em 500ms
         setTimeout(initDelayForHiddenElements, 500);
         return;
       }
@@ -145,8 +56,6 @@ export default function Home() {
     // Cleanup
     return () => {
       document.removeEventListener('DOMContentLoaded', initDelayForHiddenElements);
-      const styleEl = document.querySelector('style[data-vturb-delay]');
-      if (styleEl) styleEl.remove();
     };
   }, [])
 
@@ -163,17 +72,21 @@ export default function Home() {
             className="object-cover opacity-50"
           />
         </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">
-              Neurocientista de Nova York Revela:<br />
-              <span className="text-4xl md:text-6xl text-yellow-300">
+        <div className="container mx-auto px-4 md:px-4 relative z-10">
+          <div className="text-center mb-6">
+            <p className="text-xl md:text-5xl font-bold mb-1 text-white px-2 md:px-0">
+              <span className="hidden md:block">Famoso Neurocientista de Nova York:</span>
+              <span className="block md:hidden">Famoso Neurocientista de Nova York:</span>
+              <br />
+              <span className="text-2xl md:text-6xl text-white block px-1 md:px-0">
                 "Faça Este Truque de 8 Segundos no Ouvido
               </span>
-            </h1>
-            <h2 className="bg-yellow-400 text-blue-900 text-2xl md:text-4xl font-bold inline-block px-6 py-2 mt-4">
-              Para Melhorar Sua Memória..."
-            </h2>
+            </p>
+            <div className="inline-block w-full md:w-auto">
+              <p className="bg-red-500 text-white text-2xl md:text-6xl font-bold px-2 md:px-4 py-2 block mx-1 md:mx-0">
+                Para Melhorar Sua Memória.."
+              </p>
+            </div>
           </div>
 
           {/* Vídeo VSL */}
@@ -200,7 +113,7 @@ export default function Home() {
               <h3 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
                 Ative Sua Onda da Memória
               </h3>
-              <p className="text-xl md:text-2xl text-blue-900 font-semibold">
+              <p className="text-2xl md:text-3xl text-blue-900 font-bold">
                 (Garantia de 90 Dias)
               </p>
             </div>
@@ -212,15 +125,16 @@ export default function Home() {
                 <Image
                   src="/images/imagemproduto.png"
                   alt="Onda da Memória - Produto Completo"
-                  width={500}
-                  height={300}
+                  width={600}
+                  height={360}
                   className="max-w-full h-auto"
                 />
               </div>
 
               {/* Ícones de Benefícios */}
-              <div className="flex justify-center mb-10">
-                <div className="flex overflow-hidden rounded-full shadow-lg">
+              <div className="flex justify-center mb-10 px-4">
+                {/* Desktop - com ícones */}
+                <div className="hidden md:flex overflow-hidden rounded-full shadow-lg">
                   <div className="bg-purple-500 text-white px-8 py-4 flex items-center gap-3">
                     <Image
                       src="/images/desconto.png"
@@ -229,7 +143,7 @@ export default function Home() {
                       height={28}
                       className="w-7 h-7"
                     />
-                    <span className="font-semibold text-sm md:text-base">Desconto<br />Especial</span>
+                    <span className="font-semibold text-base">Desconto<br />Especial</span>
                   </div>
                   <div className="bg-blue-500 text-white px-8 py-4 flex items-center gap-3">
                     <Image
@@ -239,7 +153,7 @@ export default function Home() {
                       height={28}
                       className="w-7 h-7"
                     />
-                    <span className="font-semibold text-sm md:text-base">Acesso<br />Instantâneo</span>
+                    <span className="font-semibold text-base">Acesso<br />Instantâneo</span>
                   </div>
                   <div className="bg-teal-500 text-white px-8 py-4 flex items-center gap-3">
                     <Image
@@ -249,14 +163,33 @@ export default function Home() {
                       height={28}
                       className="w-7 h-7"
                     />
-                    <span className="font-semibold text-sm md:text-base">Bônus de<br />Início Rápido</span>
+                    <span className="font-semibold text-base">Bônus de<br />Início Rápido</span>
+                  </div>
+                </div>
+
+                {/* Mobile - sem ícones */}
+                <div className="flex md:hidden overflow-hidden rounded-xl shadow-lg w-full max-w-sm">
+                  <div className="bg-purple-500 text-white px-4 py-4 flex items-center justify-center flex-1">
+                    <span className="font-bold text-sm text-center leading-tight">
+                      Desconto<br />Especial
+                    </span>
+                  </div>
+                  <div className="bg-blue-500 text-white px-4 py-4 flex items-center justify-center flex-1">
+                    <span className="font-bold text-sm text-center leading-tight">
+                      Acesso<br />Instantâneo
+                    </span>
+                  </div>
+                  <div className="bg-teal-500 text-white px-4 py-4 flex items-center justify-center flex-1">
+                    <span className="font-bold text-sm text-center leading-tight">
+                      Bônus de<br />Início Rápido
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Preço com Setas */}
               <div className="text-center mb-8">
-                <p className="text-lg font-medium mb-2">Hoje Apenas Por</p>
+                <p className="text-xl md:text-2xl font-black mb-2">Hoje Apenas Por</p>
                 <div className="flex items-center justify-center gap-4 md:gap-8">
                   <span className="text-green-500 text-3xl md:text-4xl">→</span>
                   <p className="text-5xl md:text-6xl font-bold text-blue-900">R$ 47</p>
@@ -320,7 +253,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Coluna Esquerda - Referências 1-24 */}
             <div>
-              <ol className="list-none space-y-3 text-sm text-gray-600">
+              <ol className="ref-list list-none space-y-3 text-sm text-gray-600">
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">1.</span>
                   Riedel, G., & Micheau, J. (2001). Function of the hippocampus in memory formation: desperately seeking resolution. <i>Progress in Neuro-Psychopharmacology and Biological Psychiatry</i>, <i>25</i>(4), 835–853.
@@ -422,7 +355,7 @@ export default function Home() {
             
             {/* Coluna Direita - Referências 25-44 */}
             <div>
-              <ol className="list-none space-y-3 text-sm text-gray-600" start={25}>
+              <ol className="ref-list list-none space-y-3 text-sm text-gray-600" start={25}>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">25.</span>
                   Pignolo, R. J., Law, S. F., & Chandra, A. (2021). Bone Aging, Cellular Senescence, and Osteoporosis. <i>JBMR Plus</i>, <i>5</i>(4).
@@ -514,21 +447,21 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
             <div className="flex justify-center gap-6 mb-4">
-              <Link href="/privacidade" className="text-gray-600 hover:text-gray-800">
+              <span className="text-gray-600 cursor-default">
                 Política de Privacidade
-              </Link>
+              </span>
               <span className="text-gray-400">|</span>
-              <Link href="/termos" className="text-gray-600 hover:text-gray-800">
+              <span className="text-gray-600 cursor-default">
                 Termos e Condições
-              </Link>
+              </span>
               <span className="text-gray-400">|</span>
-              <Link href="/faq" className="text-gray-600 hover:text-gray-800">
+              <span className="text-gray-600 cursor-default">
                 FAQ
-              </Link>
+              </span>
               <span className="text-gray-400">|</span>
-              <a href="mailto:suporte@ondadamemoria.com" className="text-gray-600 hover:text-gray-800">
+              <span className="text-gray-600 cursor-default">
                 Contato
-              </a>
+              </span>
             </div>
             <p className="text-gray-600">
               Copyright © {new Date().getFullYear()} Onda da Memória. Todos os direitos reservados.
@@ -544,7 +477,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Popup de Saída - Removido daqui pois agora é criado dinamicamente no DOM */}
+      {/* Popup de Saída removido para testes iniciais */}
     </>
   )
 }

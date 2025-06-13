@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Configuração das fontes idêntica ao site original */
+@layer base {
+  body {
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Aplicar Open Sans nas referências científicas como no original */
+  .ref-list li {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+/* Classes utilitárias para as fontes */
+.font-open-sans {
+  font-family: var(--font-open-sans), sans-serif;
+}
+
+.font-lora {
+  font-family: var(--font-lora), serif;
+}

@@ -51,7 +51,42 @@ export default function RootLayout({
 
 
       </head>
-      <body className="font-lora">
+      <body className="font-lora antialiased" style={{
+        fontFamily: 'Lora, serif',
+        fontWeight: 400,
+        color: '#000',
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale'
+      }}>
+        
+        {/* CSS customizado para aplicar fontes como no original */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            body {
+              font-family: 'Lora', serif;
+              font-weight: 400;
+              color: #000;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+            
+            /* Aplicar Open Sans nas referências científicas como no original */
+            .ref-list li {
+              font-family: 'Open Sans', sans-serif !important;
+              font-size: 14px !important;
+              line-height: 20px !important;
+            }
+            
+            /* Garantir que outros elementos usem as fontes corretas */
+            .font-open-sans {
+              font-family: 'Open Sans', sans-serif;
+            }
+            
+            .font-lora {
+              font-family: 'Lora', serif;
+            }
+          `
+        }} />
         {children}
       </body>
     </html>
