@@ -1,9 +1,8 @@
 // app/page.tsx
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export default function Home() {
   // Carregar script da Vturb e configurar delay
@@ -40,8 +39,8 @@ export default function Home() {
       });
     };
 
-    const showElementsAfterDelay = (player: any, seconds: number) => {
-      player.displayHiddenElements(seconds, [".esconder"], {
+    const showElementsAfterDelay = (player: Element, seconds: number) => {
+      (player as any).displayHiddenElements(seconds, [".esconder"], {
         persist: true
       });
     };
@@ -256,27 +255,27 @@ export default function Home() {
               <ol className="ref-list list-none space-y-3 text-sm text-gray-600">
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">1.</span>
-                  Riedel, G., & Micheau, J. (2001). Function of the hippocampus in memory formation: desperately seeking resolution. <i>Progress in Neuro-Psychopharmacology and Biological Psychiatry</i>, <i>25</i>(4), 835–853.
+                  Riedel, G., &amp; Micheau, J. (2001). Function of the hippocampus in memory formation: desperately seeking resolution. <i>Progress in Neuro-Psychopharmacology and Biological Psychiatry</i>, <i>25</i>(4), 835–853.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">2.</span>
-                  Wong, F., Omori, S., Donghia, N. M., Zheng, E. J., & Collins, J. J. (2023). Discovering small-molecule senolytics with deep neural networks. <i>Nature Aging</i>, 1–17.
+                  Wong, F., Omori, S., Donghia, N. M., Zheng, E. J., &amp; Collins, J. J. (2023). Discovering small-molecule senolytics with deep neural networks. <i>Nature Aging</i>, 1–17.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">3.</span>
-                  Smith, F. (2024, June 26). <i>"Zombie cells" could hold the secret to Alzheimer's cure</i>. Magazine.
+                  Smith, F. (2024, June 26). <i>&ldquo;Zombie cells&rdquo; could hold the secret to Alzheimer&rsquo;s cure</i>. Magazine.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">4.</span>
-                  Reporter, P. D. S. S. (2023, November 23). <i>Killing "zombie" cells can reverse COVID brain aging</i>. Newsweek.
+                  Reporter, P. D. S. S. (2023, November 23). <i>Killing &ldquo;zombie&rdquo; cells can reverse COVID brain aging</i>. Newsweek.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">5.</span>
-                  Lin, Y.-F., Wang, L.-Y., Chen, C.-S., Li, C.-C., & Hsiao, Y.-H. (2021). Cellular senescence as a driver of cognitive decline triggered by chronic unpredictable stress. <i>Neurobiology of Stress</i>, <i>15</i>, 100341.
+                  Lin, Y.-F., Wang, L.-Y., Chen, C.-S., Li, C.-C., &amp; Hsiao, Y.-H. (2021). Cellular senescence as a driver of cognitive decline triggered by chronic unpredictable stress. <i>Neurobiology of Stress</i>, <i>15</i>, 100341.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">6.</span>
-                  Chan, D., Suk, H., Jackson , B., Milman, N., Stark, D., Klerman, E., Kitchener, E., & Avalos, V. (2021). <i>40Hz sensory stimulation induces gamma entrainment and affects brain structure, sleep and cognition in patients with Alzheimer's disease</i>.
+                  Chan, D., Suk, H., Jackson , B., Milman, N., Stark, D., Klerman, E., Kitchener, E., &amp; Avalos, V. (2021). <i>40Hz sensory stimulation induces gamma entrainment and affects brain structure, sleep and cognition in patients with Alzheimer&rsquo;s disease</i>.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">7.</span>
@@ -296,7 +295,7 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">11.</span>
-                  Dhikav, V., & Anand, K. S. (2012). Hippocampus in Health and disease: an Overview. <i>Annals of Indian Academy of Neurology</i>, <i>15</i>(4), 239–246.
+                  Dhikav, V., &amp; Anand, K. S. (2012). Hippocampus in Health and disease: an Overview. <i>Annals of Indian Academy of Neurology</i>, <i>15</i>(4), 239–246.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">12.</span>
@@ -308,19 +307,19 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">14.</span>
-                  Neumann, H., Kotter, M. R., & Franklin, R. J. M. (2008). Debris clearance by microglia: an essential link between degeneration and regeneration. <i>Brain</i>, <i>132</i>(2), 288–295.
+                  Neumann, H., Kotter, M. R., &amp; Franklin, R. J. M. (2008). Debris clearance by microglia: an essential link between degeneration and regeneration. <i>Brain</i>, <i>132</i>(2), 288–295.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">15.</span>
-                  Neumann, H., Kotter, M. R., & Franklin, R. J. M. (2008). Debris clearance by microglia: an essential link between degeneration and regeneration. <i>Brain</i>, <i>132</i>(2), 288–295.
+                  Neumann, H., Kotter, M. R., &amp; Franklin, R. J. M. (2008). Debris clearance by microglia: an essential link between degeneration and regeneration. <i>Brain</i>, <i>132</i>(2), 288–295.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">16.</span>
-                  Conde, J. R., & Streit, W. J. (2006). Microglia in the Aging Brain. <i>Journal of Neuropathology and Experimental Neurology</i>, <i>65</i>(3), 199–203.
+                  Conde, J. R., &amp; Streit, W. J. (2006). Microglia in the Aging Brain. <i>Journal of Neuropathology and Experimental Neurology</i>, <i>65</i>(3), 199–203.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">17.</span>
-                  Smith, F. (2024, June 26). <i>"Zombie cells" could hold the secret to Alzheimer's cure</i>. Magazine.
+                  Smith, F. (2024, June 26). <i>&ldquo;Zombie cells&rdquo; could hold the secret to Alzheimer&rsquo;s cure</i>. Magazine.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">18.</span>
@@ -332,15 +331,15 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">20.</span>
-                  McCarthy, J. (2023). <i>Study finds "zombie cells" produce at accelerated rate due to COVID-19</i>.
+                  McCarthy, J. (2023). <i>Study finds &ldquo;zombie cells&rdquo; produce at accelerated rate due to COVID-19</i>.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">21.</span>
-                  Ouvrier, B., Ismael, S., & Bix, G. J. (2024). Senescence and SASP Are Potential Therapeutic Targets for Ischemic Stroke. <i>Pharmaceuticals</i>, <i>17</i>(3), 312.
+                  Ouvrier, B., Ismael, S., &amp; Bix, G. J. (2024). Senescence and SASP Are Potential Therapeutic Targets for Ischemic Stroke. <i>Pharmaceuticals</i>, <i>17</i>(3), 312.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">22.</span>
-                  Kumar, M., Yan, P., Kuchel, G. A., & Xu, M. (2024). Cellular Senescence as a Targetable Risk Factor for Cardiovascular Diseases. <i>JACC. Basic to Translational Science</i>, <i>9</i>(4), 522–534.
+                  Kumar, M., Yan, P., Kuchel, G. A., &amp; Xu, M. (2024). Cellular Senescence as a Targetable Risk Factor for Cardiovascular Diseases. <i>JACC. Basic to Translational Science</i>, <i>9</i>(4), 522–534.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">23.</span>
@@ -348,7 +347,7 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">24.</span>
-                  Lee, K. S., Lin, S., Copland, D. A., Dick, A. D., & Liu, J. (2021). Cellular senescence in the aging retina and developments of senotherapies for age-related macular degeneration. <i>Journal of Neuroinflammation</i>, <i>18</i>(1).
+                  Lee, K. S., Lin, S., Copland, D. A., Dick, A. D., &amp; Liu, J. (2021). Cellular senescence in the aging retina and developments of senotherapies for age-related macular degeneration. <i>Journal of Neuroinflammation</i>, <i>18</i>(1).
                 </li>
               </ol>
             </div>
@@ -358,7 +357,7 @@ export default function Home() {
               <ol className="ref-list list-none space-y-3 text-sm text-gray-600" start={25}>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">25.</span>
-                  Pignolo, R. J., Law, S. F., & Chandra, A. (2021). Bone Aging, Cellular Senescence, and Osteoporosis. <i>JBMR Plus</i>, <i>5</i>(4).
+                  Pignolo, R. J., Law, S. F., &amp; Chandra, A. (2021). Bone Aging, Cellular Senescence, and Osteoporosis. <i>JBMR Plus</i>, <i>5</i>(4).
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">26.</span>
@@ -374,15 +373,15 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">29.</span>
-                  Singer, A. C., Martorell, A. J., Douglas, J. M., Abdurrob, F., Attokaren, M. K., Tipton, J., Mathys, H., Adaikkan, C., & Tsai, L.-H. (2018). Noninvasive 40-Hz light flicker to recruit microglia and reduce amyloid beta load. <i>Nature Protocols</i>, <i>13</i>(8), 1850–1868.
+                  Singer, A. C., Martorell, A. J., Douglas, J. M., Abdurrob, F., Attokaren, M. K., Tipton, J., Mathys, H., Adaikkan, C., &amp; Tsai, L.-H. (2018). Noninvasive 40-Hz light flicker to recruit microglia and reduce amyloid beta load. <i>Nature Protocols</i>, <i>13</i>(8), 1850–1868.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">30.</span>
-                  Ruth Maria Ingendoh, Posny, E. S., & Heine, A. (2023). Binaural beats to entrain the brain? A systematic review of the effects of binaural beat stimulation on brain oscillatory activity. <i>PLoS ONE</i>, <i>18</i>(5).
+                  Ruth Maria Ingendoh, Posny, E. S., &amp; Heine, A. (2023). Binaural beats to entrain the brain? A systematic review of the effects of binaural beat stimulation on brain oscillatory activity. <i>PLoS ONE</i>, <i>18</i>(5).
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">31.</span>
-                  Liu, C., Han, T., Xu, Z., Liu, J., Zhang, M., Du, J., Zhou, Q., Duan, Y., Li, Y., Wang, J., Cui, D., & Wang, Y. (2021). Modulating Gamma Oscillations Promotes Brain Connectivity to Improve Cognitive Impairment. <i>Cerebral Cortex</i>.
+                  Liu, C., Han, T., Xu, Z., Liu, J., Zhang, M., Du, J., Zhou, Q., Duan, Y., Li, Y., Wang, J., Cui, D., &amp; Wang, Y. (2021). Modulating Gamma Oscillations Promotes Brain Connectivity to Improve Cognitive Impairment. <i>Cerebral Cortex</i>.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">32.</span>
@@ -390,11 +389,11 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">33.</span>
-                  Ruth Maria Ingendoh, Posny, E. S., & Heine, A. (2023). Binaural beats to entrain the brain? A systematic review. <i>PLoS ONE</i>, <i>18</i>(5).
+                  Ruth Maria Ingendoh, Posny, E. S., &amp; Heine, A. (2023). Binaural beats to entrain the brain? A systematic review. <i>PLoS ONE</i>, <i>18</i>(5).
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">34.</span>
-                  Jirakittayakorn, N., & Wongsawat, Y. (2017). Brain Responses to a 6-Hz Binaural Beat: Effects on General Theta Rhythm and Frontal Midline Theta Activity. <i>Frontiers in Neuroscience</i>, <i>11</i>.
+                  Jirakittayakorn, N., &amp; Wongsawat, Y. (2017). Brain Responses to a 6-Hz Binaural Beat: Effects on General Theta Rhythm and Frontal Midline Theta Activity. <i>Frontiers in Neuroscience</i>, <i>11</i>.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">35.</span>
@@ -406,7 +405,7 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">37.</span>
-                  Staff, R. T., Hogan, M. J., Williams, D. S., & Whalley, L. J. (2018). Intellectual engagement and cognitive ability in later life. <i>BMJ</i>, <i>363</i>.
+                  Staff, R. T., Hogan, M. J., Williams, D. S., &amp; Whalley, L. J. (2018). Intellectual engagement and cognitive ability in later life. <i>BMJ</i>, <i>363</i>.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">38.</span>
@@ -414,7 +413,7 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">39.</span>
-                  Cantero, J. L., Atienza, M., Madsen, J. R., & Stickgold, R. (2004). Gamma EEG dynamics in neocortex and hippocampus during human wakefulness and sleep. <i>NeuroImage</i>, <i>22</i>(3), 1271–1280.
+                  Cantero, J. L., Atienza, M., Madsen, J. R., &amp; Stickgold, R. (2004). Gamma EEG dynamics in neocortex and hippocampus during human wakefulness and sleep. <i>NeuroImage</i>, <i>22</i>(3), 1271–1280.
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">40.</span>
@@ -430,11 +429,11 @@ export default function Home() {
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">43.</span>
-                  Chan, D., Suk, H.-J., Jackson, B. L., et al. (2022). Gamma frequency sensory stimulation in mild probable Alzheimer's disease patients. <i>PLOS ONE</i>, <i>17</i>(12).
+                  Chan, D., Suk, H.-J., Jackson, B. L., et al. (2022). Gamma frequency sensory stimulation in mild probable Alzheimer&rsquo;s disease patients. <i>PLOS ONE</i>, <i>17</i>(12).
                 </li>
                 <li className="relative pl-8">
                   <span className="absolute left-0 text-gray-500">44.</span>
-                  Cimenser, A., Hempel, E., Travers, T., et al. (2021). Sensory-Evoked 40-Hz Gamma Oscillation Improves Sleep and Daily Living Activities in Alzheimer's Disease Patients. <i>Frontiers in Systems Neuroscience</i>, <i>15</i>.
+                  Cimenser, A., Hempel, E., Travers, T., et al. (2021). Sensory-Evoked 40-Hz Gamma Oscillation Improves Sleep and Daily Living Activities in Alzheimer&rsquo;s Disease Patients. <i>Frontiers in Systems Neuroscience</i>, <i>15</i>.
                 </li>
               </ol>
             </div>
