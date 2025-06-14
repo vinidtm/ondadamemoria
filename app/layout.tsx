@@ -48,7 +48,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://scripts.converteai.net" />
         <link rel="dns-prefetch" href="https://images.converteai.net" />
         <link rel="dns-prefetch" href="https://api.vturb.com.br" />
-        
+
 <script
   src="https://cdn.utmify.com.br/scripts/utms/latest.js"
   data-utmify-prevent-xcod-sck
@@ -56,6 +56,15 @@ export default function RootLayout({
   async
   defer
 ></script>
+
+<script>
+  window.pixelId = "684daee8dde9b596611e4457";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
 
       </head>
       <body className="font-lora antialiased" style={{
