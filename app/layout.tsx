@@ -57,52 +57,21 @@ export default function RootLayout({
   defer
 ></script>
 
-<script>
-  window.pixelId = "684daee8dde9b596611e4457";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
+<script
+  dangerouslySetInnerHTML={{
+    __html: `
+      window.pixelId = "684daee8dde9b596611e4457";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+      document.head.appendChild(a);
+    `
+  }}
+/>
 
       </head>
-      <body className="font-lora antialiased" style={{
-        fontFamily: 'Lora, serif',
-        fontWeight: 400,
-        color: '#000',
-        WebkitFontSmoothing: 'antialiased',
-        MozOsxFontSmoothing: 'grayscale'
-      }}>
-        
-        {/* CSS customizado para aplicar fontes como no original */}
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            body {
-              font-family: 'Lora', serif;
-              font-weight: 400;
-              color: #000;
-              -webkit-font-smoothing: antialiased;
-              -moz-osx-font-smoothing: grayscale;
-            }
-            
-            /* Aplicar Open Sans nas referências científicas como no original */
-            .ref-list li {
-              font-family: 'Open Sans', sans-serif !important;
-              font-size: 14px !important;
-              line-height: 20px !important;
-            }
-            
-            /* Garantir que outros elementos usem as fontes corretas */
-            .font-open-sans {
-              font-family: 'Open Sans', sans-serif;
-            }
-            
-            .font-lora {
-              font-family: 'Lora', serif;
-            }
-          `
-        }} />
+      <body className="font-lora antialiased">
         {children}
       </body>
     </html>
