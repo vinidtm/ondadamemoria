@@ -26,7 +26,7 @@ export default function Home() {
 
     // Função de delay da Vturb para mostrar botão
     const initDelayForHiddenElements = () => {
-      const delaySeconds = 10; // ALTERE AQUI OS SEGUNDOS PARA APARECER O BOTÃO
+      const delaySeconds = 1038; // ALTERE AQUI OS SEGUNDOS PARA APARECER O BOTÃO
       
       const player = document.querySelector("vturb-smartplayer");
       if (!player) {
@@ -468,7 +468,7 @@ export default function Home() {
             </p>
             <p className="text-sm text-gray-500 mt-4 max-w-4xl mx-auto">
               Aviso Legal: Este produto não se destina a diagnosticar, tratar, curar ou prevenir qualquer doença. 
-              James Rivers é um pseudônimo usado com o consentimento de nosso principal neurocientista, 
+              Roberto Almeida é um pseudônimo usado com o consentimento de nosso principal neurocientista, 
               que deseja manter a privacidade pessoal para si e sua família. As qualificações e credenciais 
               atribuídas a este nome são genuínas e verificadas. Esta medida é tomada para proteger a 
               privacidade do indivíduo sem enganar nossos clientes. Agradecemos sua compreensão.
