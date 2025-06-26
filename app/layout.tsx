@@ -40,10 +40,17 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${lora.variable} ${openSans.variable}`}>
       <head>
+        {/* Script de Performance da Vturb */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);`
+          }}
+        />
+        
         {/* Otimização de Carregamento da Vturb */}
-        <link rel="preload" href="https://scripts.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/players/684afea5e6c281d4affd78cd/v4/player.js" as="script" />
+        <link rel="preload" href="https://scripts.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/players/685cff2537df4f1156e4cb9a/v4/player.js" as="script" />
         <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script" />
-        <link rel="preload" href="https://cdn.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/684afe9ba691d5032736115a/main.m3u8" as="fetch" />
+        <link rel="preload" href="https://cdn.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/685cff1941f66e1c979fcd81/main.m3u8" as="fetch" />
         <link rel="dns-prefetch" href="https://cdn.converteai.net" />
         <link rel="dns-prefetch" href="https://scripts.converteai.net" />
         <link rel="dns-prefetch" href="https://images.converteai.net" />

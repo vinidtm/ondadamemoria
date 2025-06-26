@@ -19,14 +19,14 @@ export default function Home() {
     // Carrega o script da Vturb
     if (!document.querySelector('script[src*="converteai.net"]')) {
       const script = document.createElement("script");
-      script.src = "https://scripts.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/players/684afea5e6c281d4affd78cd/v4/player.js";
+      script.src = "https://scripts.converteai.net/1db8e03a-c1fc-4fa6-b094-4a5346a615e6/players/685cff2537df4f1156e4cb9a/v4/player.js";
       script.async = true;
       document.head.appendChild(script);
     }
 
     // Função de delay da Vturb para mostrar botão
     const initDelayForHiddenElements = () => {
-      const delaySeconds = 1038; // ALTERE AQUI OS SEGUNDOS PARA APARECER O BOTÃO
+      const delaySeconds = 1040; // ALTERE AQUI OS SEGUNDOS PARA APARECER O BOTÃO
       
       const player = document.querySelector("vturb-smartplayer");
       if (!player) {
@@ -96,7 +96,7 @@ export default function Home() {
               <div
                 className="w-full h-full"
                 dangerouslySetInnerHTML={{
-                  __html: `<vturb-smartplayer id="vid-684afea5e6c281d4affd78cd" style="display: block; margin: 0 auto; width: 100%; height: 100%;"></vturb-smartplayer>`
+                  __html: `<vturb-smartplayer id="vid-685cff2537df4f1156e4cb9a" style="display: block; margin: 0 auto; width: 100%; height: 100%;"></vturb-smartplayer>`
                 }}
               />
             </div>
