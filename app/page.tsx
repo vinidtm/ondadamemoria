@@ -200,7 +200,7 @@ export default function Home() {
               {/* Botão de Compra com garantia já incluída na imagem */}
               <div className="flex justify-center">
                 <a
-                  href="https://pay.kiwify.com.br/VRI6fuu"
+                  href="https://pay.kiwify.com.br/LA5I8lH"
                   className="inline-block transform hover:scale-105 transition-all duration-200"
                 >
                   <Image
