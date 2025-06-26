@@ -192,7 +192,7 @@ export default function Home() {
                 <p className="text-xl md:text-2xl font-black mb-2">Hoje Apenas Por</p>
                 <div className="flex items-center justify-center gap-4 md:gap-8">
                   <span className="text-green-500 text-3xl md:text-4xl">→</span>
-                  <p className="text-5xl md:text-6xl font-bold text-blue-900">R$ 47</p>
+                  <p className="text-5xl md:text-6xl font-bold text-blue-900">R$ 147</p>
                   <span className="text-green-500 text-3xl md:text-4xl">←</span>
                 </div>
               </div>
